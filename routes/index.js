@@ -6,11 +6,27 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/recipe/:food', (req, res) => {
 
+//////////////// API ////////////////
+
+router.get('/recipe/:food', (req, res) => {
   const foodname = req.params.food;
-  res.json( { name:foodname, instructions:["prep", "cook", "eat"], ingredients:["food 1", "food 2", "food 3"] } );
+  const recipedata={ name:foodname, instructions:["prep", "cook", "eat"], ingredients:["food 1", "food 2", "food 3"] };
+  res.json( recipedata );
 
 });
+
+// log new recipes
+
+let recipes = [];
+
+router.post('/recipe/', (req,res) =>{
+  let recipe = req.body;
+  recipes.push(recipe);
+  console.log('Received recipe:', recipe);
+  res.json(recipe);
+})
+
+//////////////// API ////////////////
 
 module.exports = router;

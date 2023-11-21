@@ -3,17 +3,33 @@
 <head>
   <title>Express</title>
   <link rel="stylesheet" href="/stylesheets/style.css">
-  <script defer src="/public/javascripts/client.js"></script>
+  <script defer src="/javascripts/client.js"></script>
 </head>
 
 <body>
-  <h1>Express</h1>
-  <p>Welcome to Express</p>
+  <h1>Recipes</h1>
+  <p>Search Recipe</p>
 </body>
 
   <form id="input-form">
     <input type="text" id="recipe-input" placeholder='Recipe'>
-    <button type="submit">Submit</button>
+    <button type="submit">Search</button>
   </form>
+
+
+  <form id="recipe-form">
+      <h4>New recipe:</h4>
+      <input type="text" id="name-text" placeholder="Recipe Name">
+      <h4>Ingredients</h4>
+      <textarea id="ingredients-text"></textarea>
+      <button id="add-ingredient" type="button">Add ingredient</button>
+      <h4>Instructions</h4>
+      <textarea id="instructions-text"></textarea>
+      <button id="add-instruction" type="button">Add instruction</button>
+      <button id="submit" type="submit">Submit</button>
+  </form>
+
+
+<div id="recipe-div"></div>
 
 </html>
