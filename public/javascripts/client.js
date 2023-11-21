@@ -60,6 +60,9 @@ document.getElementById('input-form').addEventListener('submit', (event) => {
 var newRecipeIngredients = [];
 var newRecipeInstructions = [];
 
+/////////// Fix it so that it pushes to list on button press?? ////////////////
+
+// save ingredients
 document.getElementById('add-ingredient').addEventListener('click', () => {
     console.log("ingredients saved");
     let textareaContent = document.getElementById('ingredients-text').value;
@@ -68,6 +71,7 @@ document.getElementById('add-ingredient').addEventListener('click', () => {
     });
 });
 
+// save instructions
 document.getElementById('add-instruction').addEventListener('click', () => {
     console.log("instructions saved");
     let textareaContent = document.getElementById('instructions-text').value;
@@ -76,6 +80,7 @@ document.getElementById('add-instruction').addEventListener('click', () => {
     });
 });
 
+// finally send all in json form
 document.getElementById('recipe-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const newRecipeName = document.getElementById('name-text').value.trim();
