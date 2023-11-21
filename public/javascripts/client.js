@@ -112,3 +112,33 @@ document.getElementById('recipe-form').addEventListener('submit', function(event
     });
 });
 
+
+
+// Image handling
+document.getElementById('image-upload-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const imagesInput = document.getElementById('image-input');
+    const formData = new FormData();
+    for(let i=0; i<imagesInput.isDefaultNamespace.length; i++){
+        formData.append('images', imagesInput.files[i]);
+    }
+    fetch('/images', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok: ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Success:', data);
+        imagesInput.value = '';
+        // Handle success
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Handle errors
+    });
+});

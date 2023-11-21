@@ -27,6 +27,13 @@ router.post('/recipe/', (req,res) =>{
   res.json(recipe);
 })
 
+
+router.post('/images/', (req,res) =>{
+  let image = req.body;
+  console.log('Received image:', image);
+  res.json("Hi");
+})
+
 //////////////// API ////////////////
 
 module.exports = router;
