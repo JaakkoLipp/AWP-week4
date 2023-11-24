@@ -119,6 +119,7 @@ document.getElementById('image-upload-form').addEventListener('submit', function
     event.preventDefault();
     const imagesInput = document.getElementById('image-input');
     const formData = new FormData();
+    
     for(let i=0; i<imagesInput.isDefaultNamespace.length; i++){
         formData.append('images', imagesInput.files[i]);
     }
