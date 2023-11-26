@@ -4,7 +4,7 @@ document.getElementById("input-form").addEventListener("submit", (event) => {
   const recipeDiv = document.getElementById("recipe-div");
 
   // get recipe data
-  fetch(`/recipe/${recipe}`)
+  fetch(`/recipe/${recipe}/`)
     .then((response) => {
       if (!response.ok) {
         throw new Error("fetch failed");

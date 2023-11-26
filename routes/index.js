@@ -8,10 +8,13 @@ router.get("/", function (req, res, next) {
 
 //////////////// API ////////////////
 
-router.get("/recipe/:food", (req, res) => {
+router.get("/recipe/:food/", (req, res) => {
   const foodname = req.params.food;
-  const recipedata = {name: foodname, instructions: ["a","b"], ingredients: ["a","b"]};
-  res.json(recipedata);
+  res.json({
+    name: foodname,
+    instructions: ["a", "b"],
+    ingredients: ["a", "b"],
+  });
 });
 
 // log new recipes
