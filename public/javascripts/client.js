@@ -122,7 +122,7 @@ document
     const imageFiles = document.getElementById("image-input").files;
 
     for (let i = 0; i < imageFiles.length; i++) {
-      formData.append("recipeImages", imageFiles[i]);
+      formdata.append("recipeImages", imageFiles[i]);
     }
     fetch("/images", {
       method: "POST",
