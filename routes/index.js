@@ -1,5 +1,7 @@
 var express = require("express");
+var multer = require("multer");
 var router = express.Router();
+var upload = multer({ dest: "public/images/" });
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -28,9 +30,9 @@ router.post("/recipe/", (req, res) => {
   res.json(recipe);
 });
 
-router.post("/images/", (req, res) => {
-  let image = req.body;
-  console.log("Received image:", image);
+router.post("/images/", upload.array("recipeImages"), (req, res) => {
+  console.log("Received files:", req.files);
+
   res.json("Hi");
 });
 

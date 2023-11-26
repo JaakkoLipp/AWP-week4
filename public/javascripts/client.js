@@ -118,31 +118,22 @@ document
   .getElementById("image-upload-form")
   .addEventListener("submit", function (event) {
     event.preventDefault();
-    const imagesInput = document.getElementById("image-input");
-    const formData = new FormData();
+    const formdata = new FormData();
+    const imageFiles = document.getElementById("image-input").files;
 
-    for (let i = 0; i < imagesInput.isDefaultNamespace.length; i++) {
-      formData.append("images", imagesInput.files[i]);
+    for (let i = 0; i < imageFiles.length; i++) {
+      formData.append("recipeImages", imageFiles[i]);
     }
     fetch("/images", {
       method: "POST",
-      body: formData,
+      body: formdata,
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(
-            "Network response was not ok: " + response.statusText
-          );
-        }
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
-        imagesInput.value = "";
-        // Handle success
+        console.log(data);
       })
       .catch((error) => {
         console.error("Error:", error);
-        // Handle errors
+        // Handle errors (e.g., display an error message)
       });
   });
