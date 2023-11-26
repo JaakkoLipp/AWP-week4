@@ -1,7 +1,23 @@
 var express = require("express");
 var multer = require("multer");
 var router = express.Router();
-var upload = multer({ dest: "public/images/" });
+var path = require("path");
+
+// Storage configuration
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/images/");
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({ storage: storage });
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -23,7 +39,7 @@ router.get("/recipe/:food/", (req, res) => {
 
 let recipes = [];
 
-router.post("/recipe/", (req, res) => {
+router.post("/recipe/", upload.array("images"), (req, res) => {
   let recipe = req.body;
   recipes.push(recipe);
   console.log("Received recipe:", recipe);
@@ -31,8 +47,8 @@ router.post("/recipe/", (req, res) => {
 });
 
 // image route
-router.post("/images/", (req, res) => {
-  console.log("Received files:");
+router.post("/images/", upload.array("images"), (req, res) => {
+  console.log("Received files:", req.files);
   res.send("Hi");
 });
 

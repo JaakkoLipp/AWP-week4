@@ -120,10 +120,10 @@ document
     event.preventDefault();
     const formData = new FormData();
     const imageFiles = document.getElementById("image-input").files;
-
     for (let i = 0; i < imageFiles.length; i++) {
       formData.append("images", imageFiles[i]);
     }
+
     fetch("/images", {
       method: "POST",
       body: formData,
