@@ -1,3 +1,30 @@
+function loadinitrecipe() {
+  const recipedefault = "Pizza";
+  fetch(`/recipe/${recipedefault}/`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("fetch failed");
+      }
+      return response.json();
+    })
+    .then((recipedata) => {
+      const recipeElement = document.getElementById("recipe-div");
+      recipeElement.innerHTML = `
+            <h2>${recipedata.name}</h2>
+            <h4>Ingredients:</h4>
+            <ul>${recipedata.ingredients
+              .map((ingredient) => `<li>${ingredient}</li>`)
+              .join("")}</ul>
+            <h4>Instructions:</h4>
+            <ol>${recipedata.instructions
+              .map((step) => `<li>${step}</li>`)
+              .join("")}</ol>
+        `;
+    })
+    .catch((error) => console.error("Error:", error));
+}
+loadinitrecipe();
+
 document.getElementById("input-form").addEventListener("submit", (event) => {
   event.preventDefault();
   const recipe = document.getElementById("recipe-input").value;
