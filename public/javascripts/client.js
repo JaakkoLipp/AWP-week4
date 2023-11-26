@@ -124,7 +124,7 @@ document
       formData.append("images", imageFiles[i]);
     }
 
-    fetch("/images", {
+    fetch("/new_images", {
       method: "POST",
       body: formData,
     })

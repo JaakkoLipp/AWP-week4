@@ -1,9 +1,10 @@
 var express = require("express");
-var multer = require("multer");
 var router = express.Router();
-var path = require("path");
 
-// Storage configuration
+//var multer = require("multer");
+//var path = require("path");
+
+/* Storage configuration
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -17,7 +18,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage });*/
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -47,8 +48,8 @@ router.post("/recipe/", upload.array("images"), (req, res) => {
 });
 
 // image route
-router.post("/images", upload.array("images"), (req, res) => {
-  console.log("Received files:", req.files);
+router.post("/new_images", (req, res) => {
+  console.log("/images hit, responding with Hi");
   res.send("Hi");
 });
 
