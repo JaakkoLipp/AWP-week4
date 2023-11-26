@@ -118,15 +118,15 @@ document
   .getElementById("image-upload-form")
   .addEventListener("submit", function (event) {
     event.preventDefault();
-    const formdata = new FormData();
+    const formData = new FormData();
     const imageFiles = document.getElementById("image-input").files;
 
     for (let i = 0; i < imageFiles.length; i++) {
-      formdata.append("images", imageFiles[i]);
+      formData.append("images", imageFiles[i]);
     }
     fetch("/images", {
       method: "POST",
-      body: formdata,
+      body: formData,
     })
       .then((response) => response.json())
       .then((data) => {
