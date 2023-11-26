@@ -1,3 +1,5 @@
+// on pageload get pizza recipe
+
 function loadinitrecipe() {
   const recipedefault = "Pizza";
   fetch(`/recipe/${recipedefault}/`)
@@ -25,13 +27,15 @@ function loadinitrecipe() {
 }
 loadinitrecipe();
 
+// UI code
+
 document.getElementById("input-form").addEventListener("submit", (event) => {
   event.preventDefault();
   const recipe = document.getElementById("recipe-input").value;
   const recipeDiv = document.getElementById("recipe-div");
 
   // get recipe data
-  fetch(`/recipe/${recipe}/`)
+  fetch(`/recipe/${recipe}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error("fetch failed");
@@ -55,65 +59,61 @@ document.getElementById("input-form").addEventListener("submit", (event) => {
     .catch((error) => console.error("Error:", error));
 });
 
-// new recipe
-var newRecipeIngredients = [];
-var newRecipeInstructions = [];
+// new recipe arrays
+let ingredientsList = [];
+let instructionsList = [];
 
-/////////// Fix it so that it pushes to list on button press?? ////////////////
-
-// save ingredients
+// Handle adding an ingredient
 document.getElementById("add-ingredient").addEventListener("click", () => {
-  console.log("ingredients saved");
-  let textareaContent = document.getElementById("ingredients-text").value;
-  newRecipeIngredients = textareaContent.split("\n").filter(function (item) {
-    return item.trim() !== "";
-  });
+  const ingredient = document.getElementById("ingredients-text").value;
+  ingredientsList.push(ingredient); // augh
+  document.getElementById("ingredients-text").value = "";
 });
 
-// save instructions
+// Handle adding an instruction
 document.getElementById("add-instruction").addEventListener("click", () => {
-  console.log("instructions saved");
-  let textareaContent = document.getElementById("instructions-text").value;
-  newRecipeInstructions = textareaContent.split("\n").filter(function (item) {
-    return item.trim() !== "";
-  });
+  const instruction = document.getElementById("instructions-text").value;
+  instructionsList.push(instruction);
+  document.getElementById("instructions-text").value = "";
 });
 
-// finally send all in json form
-document
-  .getElementById("recipe-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-    const newRecipeName = document.getElementById("name-text").value.trim();
+// Handle form submission
+document.getElementById("recipe-form").addEventListener("submit", (event) => {
+  event.preventDefault();
 
-    let recipe = {
-      name: newRecipeName,
-      ingredients: newRecipeIngredients,
-      instructions: newRecipeInstructions,
-    };
+  const recipeName = document.getElementById("name-text").value;
+  const recipeData = {
+    name: recipeName,
+    ingredients: ingredientsList,
+    instructions: instructionsList,
+  };
 
-    fetch("/recipe/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(recipe),
+  fetch("/recipe/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(recipeData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+      return response.json();
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok " + response.statusText);
-        }
-        return response.json();
-      })
-      .then((recipeResponse) => {
-        console.log("Recipe submitted:", recipeResponse);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  });
+    .then((recipeResponse) => {
+      console.log("Recipe submitted:", recipeResponse);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+  //claer fields
+  document.getElementById("name-text").value = "";
+  ingredientsList = [];
+  instructionsList = [];
+});
 
-// Image handling
+// Image uploading
 document
   .getElementById("image-upload-form")
   .addEventListener("submit", function (event) {
