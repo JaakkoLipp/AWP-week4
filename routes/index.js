@@ -30,9 +30,8 @@ router.post("/recipe/", (req, res) => {
   res.json(recipe);
 });
 
-router.post("/images/", upload.array("recipeImages"), (req, res) => {
-  console.log("Received files:", req.files);
-
+router.post("/images/", (req, res) => {
+  console.log("Received files:");
   res.json("Hi");
 });
 

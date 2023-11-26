@@ -1,5 +1,4 @@
 var express = require("express");
-const multer = require("multer");
 
 var path = require("path");
 var cookieParser = require("cookie-parser");
