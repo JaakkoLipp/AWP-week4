@@ -33,7 +33,7 @@ router.post("/recipe/", (req, res) => {
 // image route
 router.post("/images/", (req, res) => {
   console.log("Received files:");
-  res.json("Hi");
+  res.send("Hi");
 });
 
 //////////////// END API ////////////////
