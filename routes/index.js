@@ -47,7 +47,7 @@ router.post("/recipe/", upload.array("images"), (req, res) => {
 });
 
 // image route
-router.post("/images/", upload.array("images"), (req, res) => {
+router.post("/images", upload.array("images"), (req, res) => {
   console.log("Received files:", req.files);
   res.send("Hi");
 });
