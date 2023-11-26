@@ -30,11 +30,12 @@ router.post("/recipe/", (req, res) => {
   res.json(recipe);
 });
 
+// image route
 router.post("/images/", (req, res) => {
   console.log("Received files:");
   res.json("Hi");
 });
 
-//////////////// API ////////////////
+//////////////// END API ////////////////
 
 module.exports = router;

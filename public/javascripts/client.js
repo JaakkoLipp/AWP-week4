@@ -134,6 +134,5 @@ document
       })
       .catch((error) => {
         console.error("Error:", error);
-        // Handle errors (e.g., display an error message)
       });
   });
