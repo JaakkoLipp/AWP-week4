@@ -12,48 +12,20 @@ document.getElementById("input-form").addEventListener("submit", (event) => {
       return response.json();
     })
     .then((recipedata) => {
-      console.log(recipedata);
-      recipeDiv.innerHTML = ""; //empty div
-
-      // Display recipe name
-      const nameH3 = document.createElement("h3");
-      nameH3.textContent = "Name";
-      recipeDiv.appendChild(nameH3);
-
-      const name = document.createElement("ul");
-      const nameLi = document.createElement("li");
-      nameLi.textContent = recipedata.name;
-      name.appendChild(nameLi);
-      recipeDiv.appendChild(name);
-
-      // Display instructions
-      const instructionsH3 = document.createElement("h3");
-      instructionsH3.textContent = "Instructions";
-      recipeDiv.appendChild(instructionsH3);
-
-      const instructionsUl = document.createElement("ul");
-      recipeDiv.appendChild(instructionsUl);
-
-      recipedata.instructions.forEach((element) => {
-        const li = document.createElement("li");
-        li.textContent = element;
-        instructionsUl.appendChild(li);
-      });
-
-      // Display ingredients
-      const ingredientsH3 = document.createElement("h3");
-      ingredientsH3.textContent = "Ingredients";
-      recipeDiv.appendChild(ingredientsH3);
-
-      const ingredientsUl = document.createElement("ul");
-      recipeDiv.appendChild(ingredientsUl);
-
-      recipedata.ingredients.forEach((element) => {
-        const li = document.createElement("li");
-        li.textContent = element;
-        ingredientsUl.appendChild(li);
-      });
-    });
+      const recipeElement = document.getElementById("recipe-div");
+      recipeElement.innerHTML = `
+            <h2>${recipedata.name}</h2>
+            <h4>Ingredients:</h4>
+            <ul>${recipedata.ingredients
+              .map((ingredient) => `<li>${ingredient}</li>`)
+              .join("")}</ul>
+            <h4>Instructions:</h4>
+            <ol>${recipedata.instructions
+              .map((step) => `<li>${step}</li>`)
+              .join("")}</ol>
+        `;
+    })
+    .catch((error) => console.error("Error:", error));
 });
 
 // new recipe

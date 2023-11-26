@@ -10,7 +10,7 @@ router.get("/", function (req, res, next) {
 
 router.get("/recipe/:food", (req, res) => {
   const foodname = req.params.food;
-  const recipedata = { name: foodname, instructions: [], ingredients: [] };
+  const recipedata = {name: foodname, instructions: ["a","b"], ingredients: ["a","b"]};
   res.json(recipedata);
 });
 
